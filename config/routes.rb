@@ -1,9 +1,15 @@
 Baamv::Application.routes.draw do
-  get "static_pages/home"
 
-  get "static_pages/contact"
+  get "users/new"
 
-  get "static_pages/aboutme"
+  resources :users
+
+  match '/signup', to: 'users#new'
+  
+  match '/help', to: 'static_pages#help'
+  match '/contact', to: 'static_pages#contact'
+  match '/aboutme', to: 'static_pages#aboutme'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +60,7 @@ Baamv::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'StaticPages#home'
 
   # See how all your routes lay out with "rake routes"
 
