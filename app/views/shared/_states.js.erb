@@ -1,0 +1,1 @@
+$('#user_state').html("<%= escape_javascript(options_for_select @country.states.map { |state| [state.name,state.id] }) %>");

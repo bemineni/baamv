@@ -1,0 +1,39 @@
+<% provide(:title, "Login to your account") %>
+<div class="row" style="height:30px;">
+	</div>
+<h1> Login </h1>
+<div class="row" style="height:10px;">
+</div>
+<div class="row">
+	<%= form_for(:session, url: session_index_path) do |f| %>
+	<div class="span4 well">
+		<fieldset>
+        	<div class="control-group">
+            	<label class="control-label">Email</label>
+            	<div class="controls">
+                	<%= f.text_field :email %>
+            	</div>
+        	</div>
+    	</fieldset>
+		<fieldset>
+        	<div class="control-group">
+            	<label class="control-label">Password</label>
+            	<div class="controls">
+                	<%= f.password_field :password %> 
+            	</div>
+        	</div>
+    	</fieldset>
+    	<button type="submit" class="btn btn-primary">Submit</button>
+    	<button type="button" class="btn">Cancel</button>
+    	<br/>
+    	<br/>
+    	
+    	<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    	
+	</div>
+	<% end %>
+	<div class="span2 offset3">
+         This is something to flash
+	</div>
+	
+</div>

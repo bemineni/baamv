@@ -17,7 +17,6 @@ gem 'unicorn'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platform => :ruby
@@ -31,6 +30,10 @@ group :test, :development do
   gem 'annotate', '~> 2.4.1.beta'
   gem 'factory_girl_rails'
   gem 'hirb'
+#  gem 'ruby-debug19', :require => 'ruby-debug', :platforms => :mri_19
+#  gem 'ruby-debug-base19'
+#  gem 'linecache19'
+#  gem 'ruby-debug', :platforms => :mri_18
 end
 
 group :test do

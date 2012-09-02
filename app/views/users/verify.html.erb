@@ -1,0 +1,8 @@
+<% provide(:title,"Account verification") %>
+<h1> Account Verification </h1>
+<% if @verified %>
+    <h3>Your account has been verified. Please login to use your account<h3>
+    <%= link_to "Login" , root_path %>
+<% else %>
+ 	<h3>Verification key not found. May be your account has already been verified<h3>
+<% end %>

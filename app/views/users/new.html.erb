@@ -3,12 +3,32 @@
 <div class="well">
 <%=  form_for(@user) do |f| %>
     <%= render 'shared/error_messages', :object => f.object %>
+
     <fieldset>
-    	<div class="control-group">
-            <label class="control-label">User name:</label>
+        <div class="control-group">
+            <label class="control-label">Email:</label>
             <div class="controls">
-                <%= f.text_field :username %> 
-                 <p class="help-block">Please enter the username for your account</p>
+                <%= f.text_field :email %>
+                <p class="help-block">Please enter a valid email address</p>
+            </div>
+        </div>
+    </fieldset>
+   
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">Password:</label>
+            <div class="controls">
+                <%= f.password_field :password %> 
+                 <p class="help-block">Please enter the password for this account</p>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">Re-enter Password:</label>
+            <div class="controls">
+                <%= f.password_field :password_confirmation %> 
+                 <p class="help-block">Please re-enter the password for this account</p>
             </div>
         </div>
     </fieldset>
@@ -44,7 +64,40 @@
     	<div class="control-group">
             <label class="control-label">Sex:</label>
             <div class="controls">
-                <%= f.select :sex,{:MALE=>1, :FEMALE=>2} %>
+                <%= f.select :sex,{:MALE=>:MALE, :FEMALE=>:FEMALE} %>
+            </div>
+        </div>
+    </fieldset>
+
+      <fieldset>
+        <div class="control-group">
+            <label class="control-label">Country:</label>
+            <div class="controls">
+                <%= 
+                    if !Country.find_by_code("US").nil? 
+                        f.select :country_id, Country.all.map{ |country| [country.name , country.id] }  ,{:selected => Country.find_by_code("US").id}
+                    else
+                        f.select :country_id,[],{:insert_blank => true}
+                    end
+                %>
+                <p class="help-block">Please select the country</p>
+            </div>
+        </div>
+    </fieldset> 
+
+     <fieldset>
+        <div class="control-group">
+            <label class="control-label">State:</label>
+            <div class="controls">
+                <%= 
+                   if !Country.find_by_code("US").nil? and !Country.find_by_code("US").states.nil?
+                       f.select :state_id, Country.find_by_code("US").states.map{ |state| [state.name , state.id] } 
+                   else
+                       f.select :state_id ,[], { :insert_blank => true }
+                   end
+                   
+                 %>
+                <p class="help-block">Please enter the State/Province</p>
             </div>
         </div>
     </fieldset>
@@ -61,25 +114,18 @@
 
     <fieldset>
         <div class="control-group">
-            <label class="control-label">State:</label>
+            <label class="control-label">Phone</label>
             <div class="controls">
-                <%= f.select :state, Country.find_by_code("IN").states.map{ |state| [state.name , state.id] } %>
-                <p class="help-block">Please enter the State/Province</p>
+                <%= f.text_field :phone %>
+                <p class="help-block">Please enter  your phone number</p>
             </div>
         </div>
     </fieldset>
 
-    <fieldset>
-        <div class="control-group">
-            <label class="control-label">Country:</label>
-            <div class="controls">
-                <%= f.select :country, Country.all.map{ |country| [country.name , country.id] } %>
-                <p class="help-block">Please select the country</p>
-            </div>
-        </div>
-    </fieldset>
-
-
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn">Cancel</button>
 <% end %>
 </div>
 

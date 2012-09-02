@@ -1,10 +1,25 @@
 Baamv::Application.routes.draw do
 
-  get "users/new"
-
-  resources :users
+  #users methods
+  resources :users do
+    collection do
+      get 'verify'
+    end
+  end
 
   match '/signup', to: 'users#new'
+  
+  #Session
+
+  resources :session, only: [:new,:create,:destroy]
+
+  match '/login', to: 'session#new'
+  match '/logout', to: 'session#destroy' , via: :delete
+
+  
+  # Common controller methods
+  match 'common/getStates', to: 'common#getStates'
+  
   
   match '/help', to: 'static_pages#help'
   match '/contact', to: 'static_pages#contact'
