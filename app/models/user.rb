@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-   attr_accessible :firstname,:lastname,:initial,:sex,:address,:city,:state_id,:country_id ,
-                   :zip,:email,:phone,:mobile,:password,:password_confirmation,:verify_key ,
-                   :remember_token
+   attr_accessible :username, :firstname,:lastname,:initial,:sex,:address,:city,:state_id,
+                   :country_id ,:zip,:email,:phone,:mobile,:password,:password_confirmation,
+                   :verify_key ,:remember_token
    belongs_to :country
    belongs_to :state 
+   has_many :blogs , :foreign_key => :author, :dependent => :destroy
 
    has_secure_password
 
@@ -11,6 +12,8 @@ class User < ActiveRecord::Base
    before_save :create_verify_key
    before_save :create_remember_token
 
+   USERNAME_REGEX = /^[a-zA-Z0-9]+$/i
+   validates :username, :presence => true, :length => { :maximum => 15 } , :format => { :with => USERNAME_REGEX }
    validates :firstname, :presence => true, :length => { :maximum => 20 }
    validates :lastname, :presence => true, :length => { :maximum => 20 }
    SEX_REGEX = /^(male|female)$/i

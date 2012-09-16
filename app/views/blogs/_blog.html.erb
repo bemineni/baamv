@@ -1,0 +1,19 @@
+<div>
+	<div class="well well-small"><h3> <%= blog.title %></h3></div>
+	<hr/>
+	<div>
+		<p><%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %></p>
+	</div>
+    <hr/>
+	<div class="row-fluid">
+		<div class="span2">
+			<% if current_user?(blog.user) %>
+			  <%= link_to "Edit blog", new_blog_path ,:class => "btn btn-primary"%>
+			<% end %>
+		</div>
+		<div class="span2 offset12">
+			<h5><%= blog.user.username %></h5>
+			<h5><%= blog.created_at %></h5>
+		</div>
+	</div>
+</div>

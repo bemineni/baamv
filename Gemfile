@@ -10,6 +10,8 @@ gem 'capistrano'
 gem 'will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'modernizr_rails', :require => 'modernizr-rails'
+gem 'highlight', :require => 'simplabs/highlight'
+gem 'RedCloth',:require => 'redcloth'
 #Use unicorn as app server
 gem 'unicorn'
 

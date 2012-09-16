@@ -1,5 +1,17 @@
 <%= provide(:title , "Home") %>
-<h1>My world</h1>
-
-<p> Site getting built.</p>
+<div class="hero-unit">
+    <h1><%= "#{APPNAME}" %></h1>
+    <p>Welcome to the world of zero. I am nothing with out you.</p>
+</div>
+<div class="row-fluid">
+	<div class="span9">
+			<%= render partial: 'blogs/blog', collection: Blog.all %>
+	</div>
+	<div class="well span2">
+		<% if !is_signedin? %>
+			<%= link_to "Post new blog", new_blog_path ,:class => "btn btn-primary"%>
+		<% end %>
+		<div> Other suggestions go here </div>
+	</div>
+</div>
 

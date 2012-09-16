@@ -9,4 +9,10 @@ module ApplicationHelper
       end
   end
 
+  def codeHighlight(text)
+		text.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
+				"<div class=\"codeblock\">" + highlight_code($2, $3) + "</div>"
+		end
+  end
+
 end

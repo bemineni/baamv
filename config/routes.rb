@@ -1,5 +1,11 @@
 Baamv::Application.routes.draw do
 
+  #Static pages on this website
+  match '/help', to: 'static_pages#help'
+  match '/contact', to: 'static_pages#contact'
+  match '/aboutme', to: 'static_pages#aboutme'
+
+
   #users methods
   resources :users do
     collection do
@@ -8,6 +14,10 @@ Baamv::Application.routes.draw do
   end
 
   match '/signup', to: 'users#new'
+
+  #blogs
+
+  resources :blogs
   
   #Session
 
@@ -21,10 +31,7 @@ Baamv::Application.routes.draw do
   match 'common/getStates', to: 'common#getStates'
   
   
-  match '/help', to: 'static_pages#help'
-  match '/contact', to: 'static_pages#contact'
-  match '/aboutme', to: 'static_pages#aboutme'
-
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

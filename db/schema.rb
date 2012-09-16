@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901203755) do
+ActiveRecord::Schema.define(:version => 20120916203550) do
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "author"
+    t.integer  "views"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -48,8 +57,10 @@ ActiveRecord::Schema.define(:version => 20120901203755) do
     t.string   "password_digest"
     t.string   "verify_key"
     t.string   "remember_token"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end
