@@ -1,7 +1,8 @@
 <div class="row-fluid">
     <div class=" well span9">
-	   <%= form_for @blog do |f| %>
+	   <%= form_for @blog, :html=>{:multipart => true } do |f|  %>
 	       <%= render 'shared/error_messages', :object => f.object %>
+           <%= f.hidden_field :id %>
            <fieldset>
                 <div class="control-group">
                     <label class="control-label">Title</label>
@@ -12,8 +13,8 @@
             </fieldset>
             <div class="btn-toolbar">
                 <div class="btn-group">
-                    <a class="btn" href="#"><i class="icon-bold"></i></a>
-                    <a class="btn" href="#"><i class="icon-align-justify"></i></a>
+                    <a class="btn" href="#" onclick="insertString(0)"><i class="icon-bold"></i></a>
+                    <a class="btn" href="#" onclick="insertString(1)"><i class="icon-align-justify"></i>  &lt/code&gt</a>
                 </div>
             </div>
             </br>
@@ -24,12 +25,19 @@
                     </div>
                 </div>
             </fieldset>
-            <br/>
+            <div class="attachments">
+                <%= f.fields_for :attachments do |builder| %>
+                    <%= render "common/attachment_fields", :f => builder %>
+                <% end %>
+                <%= link_to_add_fields("Add attachments", f, :attachments) %>
+            </div>
+            </br>
+            </br>
             <button type="Submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn">Cancel</button>
 	   <% end %>
     </div>
-    <div class="well span2">
+    <div class="well span3">
         <p> Test or help links</p>
     </div>
 </div>

@@ -2,16 +2,25 @@
 	<div class="well well-small"><h3> <%= blog.title %></h3></div>
 	<hr/>
 	<div>
-		<p><%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %></p>
+		<%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
+	</div>
+	<hr/>
+	<% if blog.attachments.all.count > 0 %>
+	<div>
+		<h5>Attachements</h5>
+		<% blog.attachments.all.each do |attachment| %>
+		    <%= link_to File.basename(attachment.file.url), attachment.file.url %>
+		<% end %> 
 	</div>
     <hr/>
+    <% end %>
 	<div class="row-fluid">
 		<div class="span2">
 			<% if current_user?(blog.user) %>
-			  <%= link_to "Edit blog", new_blog_path ,:class => "btn btn-primary"%>
+			  <%= link_to "Edit blog", edit_blog_path(blog) ,:class => "btn btn-primary"%>
 			<% end %>
 		</div>
-		<div class="span2 offset12">
+		<div class="span2 offset8">
 			<h5><%= blog.user.username %></h5>
 			<h5><%= blog.created_at %></h5>
 		</div>

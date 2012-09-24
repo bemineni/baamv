@@ -5,9 +5,9 @@
 </div>
 <div class="row-fluid">
 	<div class="span9">
-			<%= render partial: 'blogs/blog', collection: Blog.all %>
+			<%= render partial: 'blogs/blog', collection: Blog.published_blogs %>
 	</div>
-	<div class="well span2">
+	<div class="well span3">
 		<% if !is_signedin? %>
 			<%= link_to "Post new blog", new_blog_path ,:class => "btn btn-primary"%>
 		<% end %>

@@ -8,10 +8,11 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~>3.0.0'
 gem 'capistrano'
 gem 'will_paginate'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '~>2.1.2'
 gem 'modernizr_rails', :require => 'modernizr-rails'
 gem 'highlight', :require => 'simplabs/highlight'
 gem 'RedCloth',:require => 'redcloth'
+gem 'carrierwave'
 #Use unicorn as app server
 gem 'unicorn'
 
