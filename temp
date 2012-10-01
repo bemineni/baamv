@@ -1,1 +1,2 @@
-
+<%= link_to File.basename(f.object.file.url), f.object.file.url %>
+<%= image_tag f.object.file.url %>

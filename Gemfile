@@ -12,6 +12,7 @@ gem 'twitter-bootstrap-rails', '~>2.1.2'
 gem 'modernizr_rails', :require => 'modernizr-rails'
 gem 'highlight', :require => 'simplabs/highlight'
 gem 'RedCloth',:require => 'redcloth'
+gem 'rmagick'
 gem 'carrierwave'
 #Use unicorn as app server
 gem 'unicorn'

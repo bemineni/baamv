@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120923071522) do
+ActiveRecord::Schema.define(:version => 20120930222646) do
 
   create_table "attachments", :force => true do |t|
     t.text     "description"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(:version => 20120923071522) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "images", :force => true do |t|
+    t.string   "name"
+    t.string   "file"
+    t.integer  "imageattachable_id"
+    t.string   "imageattachable_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "images", ["imageattachable_id"], :name => "index_images_on_imageattachable_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"

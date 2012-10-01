@@ -4,12 +4,22 @@
 	<div>
 		<%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
 	</div>
+	
+	<% if blog.images.all.count > 0 %>
 	<hr/>
+	<div>
+		<h5>Images</h5>
+		<% blog.images.all.each do |image| %>
+		    <%= image_tag image.file_url(:thumb).to_s %>
+		<% end %> 
+	</div>
+    <% end %>
+    <hr/>
 	<% if blog.attachments.all.count > 0 %>
 	<div>
 		<h5>Attachements</h5>
 		<% blog.attachments.all.each do |attachment| %>
-		    <%= link_to File.basename(attachment.file.url), attachment.file.url %>
+		    <%= link_to File.basename(attachment.file_url.to_s), attachment.file_url.to_s %>
 		<% end %> 
 	</div>
     <hr/>
