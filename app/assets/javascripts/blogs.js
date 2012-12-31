@@ -62,6 +62,8 @@ $(document).ready(function()
 			$('#blog_body').insertAtCaret("\t");
 		}
     });
+
+    
 });
 
 function remove_fields(link) {
@@ -74,4 +76,10 @@ function add_fields(link, association, content)
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().prepend(content.replace(regexp, new_id));
+}
+
+function change_display(image)
+{
+    alert(image);
+    $('#image-id').attr("src",image);
 }

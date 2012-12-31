@@ -10,7 +10,8 @@
 	<div>
 		<h5>Images</h5>
 		<% blog.images.all.each do |image| %>
-		    <%= image_tag image.file_url(:thumb).to_s %>
+		    <%= link_to (image_tag image.file_url(:thumb).to_s ,:class=>"img-polaroid") , "baamvdialog", :class => 'dialogopener' ,:data=>{:src=>image.file_url(:show).to_s} %>
+		    
 		<% end %> 
 	</div>
     <% end %>

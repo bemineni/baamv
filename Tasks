@@ -3,6 +3,7 @@ Add code at the caret when editing blog. -> DONE
 Able to insert tabs inside the text area when creating or editing blog -> DONE
 Add attachments to the blog -> DONE
 Restrict user to add images to attachments -> Done
-Add images to blogs
+Add images to blogs -> DONE
+Deploy the application using unicorn and nginx
 Add images to users
 Add comments to the blog.

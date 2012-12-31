@@ -1,2 +1,2 @@
-<%= link_to File.basename(f.object.file.url), f.object.file.url %>
-<%= image_tag f.object.file.url %>
+
+<a href="#myModal" onClick='change_display()' role="button" class="btn" data-toggle="modal"><%= image_tag image.file_url(:thumb).to_s %></a>

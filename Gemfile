@@ -13,6 +13,7 @@ gem 'modernizr_rails', :require => 'modernizr-rails'
 gem 'highlight', :require => 'simplabs/highlight'
 gem 'RedCloth',:require => 'redcloth'
 gem 'rmagick'
+gem 'mini_magick'
 gem 'carrierwave'
 #Use unicorn as app server
 gem 'unicorn'

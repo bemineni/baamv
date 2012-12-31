@@ -17,6 +17,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'common/modal_dialog' %>
 <%= render 'layouts/header' %>
 <div class="container" style="min-height:500px;">
    <% flash.each do |key, value| %>
