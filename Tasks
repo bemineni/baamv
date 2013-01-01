@@ -7,3 +7,10 @@ Add images to blogs -> DONE
 Deploy the application using unicorn and nginx
 Add images to users
 Add comments to the blog.
+
+
+
+Capastrino tasks
+------------------
+run bundle install
+easy_install Pygments -> after installing python and setuptools
