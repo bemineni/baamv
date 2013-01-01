@@ -15,6 +15,7 @@ gem 'RedCloth',:require => 'redcloth'
 gem 'rmagick'
 gem 'mini_magick'
 gem 'carrierwave'
+gem 'libv8'
 #Use unicorn as app server
 gem 'unicorn'
 
@@ -24,7 +25,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platform => :ruby
+  gem 'therubyracer', 0.10.2',:platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
