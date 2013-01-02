@@ -76,5 +76,6 @@ Baamv::Application.configure do
   enable_starttls_auto: true,
   user_name: "srikanth.bemineni@gmail.com",
   password: "sripriya21"
+  }
 
 end

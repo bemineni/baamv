@@ -18,6 +18,10 @@ gem 'carrierwave'
 gem 'libv8'
 #Use unicorn as app server
 gem 'unicorn'
+gem 'less'
+gem 'less-rails'
+gem 'coffee-rails'
+gem 'coffee-script'
 
 # Gems used only fior assets and not required
 # in production environments by default.
@@ -25,7 +29,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', 0.10.2',:platform => :ruby
+  gem 'therubyracer', '0.10.2',:platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end

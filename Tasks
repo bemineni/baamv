@@ -14,3 +14,4 @@ Capastrino tasks
 ------------------
 run bundle install
 easy_install Pygments -> after installing python and setuptools
+rails g bootstrap:install -f for boot strap

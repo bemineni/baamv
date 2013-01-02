@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: baamv
   pool: 5
-  username: root
-  password: rootpwd123!
+  username: iamzero
+  password: rootpwd
   host: localhost
