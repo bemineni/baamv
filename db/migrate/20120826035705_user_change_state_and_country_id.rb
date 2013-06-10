@@ -5,5 +5,7 @@ class UserChangeStateAndCountryId < ActiveRecord::Migration
   end
 
   def down
+  	rename_column :users, :state_id , :state
+  	rename_column :users, :country_id , :country
   end
 end

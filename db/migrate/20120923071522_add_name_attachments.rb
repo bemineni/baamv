@@ -5,6 +5,7 @@ class AddNameAttachments < ActiveRecord::Migration
   end
 
   def down
+  	remove_index :attachments, :name
   	remove_column :attachments , :name
   end
 end

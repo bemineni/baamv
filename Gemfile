@@ -9,7 +9,6 @@ gem 'rvm-capistrano'
 gem 'bcrypt-ruby', '~>3.0.0'
 gem 'capistrano'
 gem 'will_paginate'
-gem 'twitter-bootstrap-rails', '~>2.1.2'
 gem 'modernizr_rails', :require => 'modernizr-rails'
 gem 'highlight', :require => 'simplabs/highlight'
 gem 'RedCloth',:require => 'redcloth'
@@ -19,10 +18,6 @@ gem 'carrierwave'
 gem 'libv8'
 #Use unicorn as app server
 gem 'unicorn'
-gem 'less'
-gem 'less-rails'
-gem 'coffee-rails'
-gem 'coffee-script'
 
 # Gems used only fior assets and not required
 # in production environments by default.

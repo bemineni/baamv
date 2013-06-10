@@ -1,8 +1,9 @@
 class RemoveusernameFromUser < ActiveRecord::Migration
   def up
+    remove_column :users ,:username
   end
 
   def down
-  	remove_column :users ,:username
+  	add_column :users , :username , :string
   end
 end

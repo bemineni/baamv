@@ -5,5 +5,7 @@ class Addcountryid < ActiveRecord::Migration
   end
 
   def down
+  	remove_index :states , [:country_id]
+  	remove_column :states, :country_id
   end
 end
