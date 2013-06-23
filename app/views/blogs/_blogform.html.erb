@@ -1,26 +1,26 @@
-<div class="row-fluid">
-    <div class=" well span9">
+<div >
+    <div>
 	   <%= form_for @blog, :html=>{:multipart => true } do |f|  %>
 	       <%= render 'shared/error_messages', :object => f.object %>
            <%= f.hidden_field :id %>
            <fieldset>
-                <div class="control-group">
-                    <label class="control-label">Title</label>
-                    <div class="controls">
+                <div >
+                    <label>Title</label>
+                    <div>
                         <%= f.text_field :title , :class => "input-xxxlarge" ,:placeholder => "Please enter the title for your blog"%>
                     </div>
                 </div>
             </fieldset>
-            <div class="btn-toolbar">
-                <div class="btn-group">
-                    <a class="btn" href="#" onclick="insertString(0)"><i class="icon-bold"></i></a>
-                    <a class="btn" href="#" onclick="insertString(1)"><i class="icon-align-justify"></i>  &lt/code&gt</a>
+            <div>
+                <div>
+                    <a href="#" onclick="insertString(0)">icon-bold</a>
+                    <a href="#" onclick="insertString(1)">icon-align-justify</a>
                 </div>
             </div>
             </br>
             <fieldset>
-                <div class="control-group">
-                    <div class="controls">
+                <div>
+                    <div>
                         <%= f.text_area :body , :cols => 200, :rows => 25 , :class => "input-textarea" ,:placeholder => "Pen is mightier than sword"%>
                     </div>
                 </div>
@@ -41,11 +41,11 @@
             </div>
             </br>
             </br>
-            <button type="Submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn">Cancel</button>
+            <button type="Submit" >Submit</button>
+            <button type="button" >Cancel</button>
 	   <% end %>
     </div>
-    <div class="well span3">
+    <div >
         <p> Test or help links</p>
     </div>
 </div>

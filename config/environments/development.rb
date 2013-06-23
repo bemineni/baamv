@@ -46,4 +46,11 @@ Baamv::Application.configure do
   user_name: "srikanth.bemineni@gmail.com",
   password: "sripriya21"
 }
+
+# Add the fonts path
+config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+# Precompile additional assets
+config.assets.precompile += %w( .svg .eot .woff .ttf )
+
 end

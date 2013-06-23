@@ -28,6 +28,8 @@ group :assets do
   gem 'therubyracer', '0.10.2',:platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'compass-rails'
 end
 
 group :test, :development do
