@@ -30,100 +30,30 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div class="red-line"></div>
-
-  <div id="nav-bar" class="gradient"></div>
-
-  <div id="container">
-    <img id="logo" src= <%= asset_path('banner.png') %> width="342" height="100"></img>
-      <div id="izmenu"> 
-      <ul>
-        <li class="menu-heading"><a href="#"><i class="icon-home"></i>home</a></li>
-        <li class="menu-heading last-item"><a href="#"><i class="icon-user"></i>login</a>
-          <ul class="popup-menu">
-            <li><a href="#" ><i class="icon-wrench"></i>settings</a></li>
-              <li class="last-item"><a href="#"><i class="icon-remove-sign"></i>logout</a></li>
-            </ul>
-          </li>
-      </ul>
-    </div>
   
+    <%= render 'layouts/header' %>
+    <div style="clear:both"></div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
     <div id="main">
-      <div id="right">
-        <ul id="share">
-          <li><a class="button button-normal" href="#"><i class="icon-twitter"></i>twitter</a></li>
-          <li><a class="button button-normal" href="#"><i class="icon-facebook"></i>facebook</a></li>
-        </ul>
-          <div class="side-box">
-            <div class="side-heading"><span>check this out</span></div>
-            <ol>
-                       <li><div><a href="#">Other link 1</a></div></li>
-                       <li ><div><a href="#">Other link 1</a></div></li>
-                       <li ><div><a href="#">Other link 1</a></div></li>
-                       <li class="last-item"><div><a href="#">Other link 1</a></div></li>
-            </ol>
-          </div>
-        </div>
-      <div id="left">
-        <div class="banner"><h1> My first Blog </h1><h4>Srikanth Bemineni</h4><i>January 14 1982 05:08:45 UTC</i></div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac sapien felis, a hendrerit sapien. Vivamus ut purus vel lacus adipiscing commodo     ac ac ipsum. Praesent luctus lorem et enim posuere venenatis. Duis vel elit quis lectus vulputate sollicitudin quis ut libero. Class aptent     taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed tincidunt nibh vel nisi bibendum eu vulputate odio aliquet. Morbi tellus sem, egestas at viverra ac, pharetra ac libero. Donec ligula dolor, tincidunt nec ullamcorper eu, consectetur sed dui. Ut imperdiet dui neque, eget placerat orci. Pellentesque ut erat et tortor ultricies euismod. Praesent accumsan posuere tempus. Vestibulum rhoncus ligula id massa venenatis ullamcorper. Quisque in odio nunc, quis tincidunt neque.
-
-        Sed arcu nisi, lobortis pharetra sollicitudin quis, tempus eget nisi. Fusce porta aliquam lacus ac fermentum. Donec tincidunt augue nec urna pretium lacinia ultricies lectus ornare. Cras non molestie risus. Nam feugiat ornare leo, eu facilisis ipsum cursus iaculis. Nunc in sem eu sem dictum gravida. Fusce quam purus, rutrum sed eleifend quis, tempus in ligula. Nunc aliquet fringilla elit vitae feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis nisl nisl. Sed odio massa, ornare quis porttitor et, luctus ut diam. Maecenas eget sapien libero, quis lobortis leo. Morbi vestibulum, est vitae elementum porttitor, justo ante mattis sapien, viverra fermentum diam sem sed dolor. Sed id lorem mauris, ac imperdiet dolor. Nunc vulputate velit eget eros blandit at consequat ante faucibus. Hi how are you
-          </p>
-          <div class="attachements">
-            <h3>Attachements</h3>
-            <ul>
-              <li><a href="#">fileone.txt</a></li>
-              <li><a href="#">fileone.txt</a></li>
-              <li><a href="#">fileone.txt</a></li>
-            </ul>
-          </div>
-          
-          <div class="images">
-            <h3>Images</h3>
-            <ul>
-              <li><a href="#"><img src="C:\Users\bemineni\Desktop\iamzero\img\logo2.png"></img></a></li>
-              <li><a href="#"><img src="C:\Users\bemineni\Desktop\iamzero\img\logo2.png"></img></a></li>
-              <li><a href="#"><img src="C:\Users\bemineni\Desktop\iamzero\img\logo2.png"></img></a></li>
-            </ul>
-          </div>
-        </div>
-
+       <%= yield %>
     </div>
   </div>
-    <div style="clear:both"></div>
-  <div class="footer">
-       <div id="footer-content">
-         <ul>
-          <li> About Us </li>
-          <li> Help </li>
-          <li> Privacy </li>
-         </ul>
-         <ul>
-          <li> FAQ </li>
-          <li> Contant Us </li>
-          <li> Terms and Conditions </li>
-         </ul>
-         <ul class="footer-last">
-          <li>Social</li>
-          <li style="padding-top:5px;"><a class="ico" href="#"><i class="icon-twitter icon-2x"></i></a> <a class="ico" href="#"><i class="icon-facebook icon-2x"></i></a></li>
-         </ul>
-       </div>
-    </div>
+  <div style="clear:both"></div>
+  <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
 
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.js"><\/script>')</script>
-
-        <script src= <%= asset_path('plugins.js') %> </script>
-
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.js"><\/script>')</script>
+  <script src= <%= asset_path('plugins.js') %> </script>
+  <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+  </script>
+  </body>
 </html>
 
 

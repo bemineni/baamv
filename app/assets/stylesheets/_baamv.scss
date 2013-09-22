@@ -32,8 +32,38 @@
 #main{
     float:left;
 	margin-top:5px;
-	
 	@include border-rounded(4);
+	width:100%;
+}
+
+.alert{
+	@include border-rounded(4);
+	@include single-text-shadow;
+	border-style:solid;
+	border-width:1px;
+	margin:10px 0 10px 0;
+	padding : 10px 10px 10px 10px;
+}
+
+.alert-success{
+	background-color: $green-light;
+	color:$green-dark;
+	
+}
+
+.alert-notice,.alert-info{
+   background-color: $blue-light;	
+   color:$blue-dark;
+}
+
+.alert-error,.alert-danger{
+	background-color: $red-light;
+	color:$red-dark;
+}
+
+.alert-warn{
+	background-color: $orange-light;
+	color:$orange-dark;
 }
 
 
@@ -175,26 +205,47 @@
 
 .button
 {
-	border:1px solid rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 	@include border-rounded(4);
-	padding:10px 10px 10px 10px;
+	white-space: nowrap;
+	cursor:pointer;
 	display:inline-block;
-	font-size:1.2em;
 	color:white;
 	@include shadow-inner(0,-3,10,0.20);
 	text-shadow:0 1px 0 rgba(0,0,0,0.35);
 	text-decoration:none;
 	vertical-align:middle;
-	:hover
+	outline:none;
+	&:hover
 	{
 	   color:#ffffff;
 	}
 }
 
 
+
+.button-small{
+    padding:5px 5px 5px 5px;
+	font-size:5em;
+}
+
+.button-medium{
+    padding:7px 7px 7px 7px;
+	font-size:.9em;
+}
+
+.button-large{
+    padding:10px 10px 10px 10px;
+	font-size:1.2em;
+}
+
+
 .button-normal
 {
 	background-color:$blue;
+	border:1px solid $blue;
+	&:hover{
+		background-color:#2E7799;
+	}
 }
 
 
@@ -399,7 +450,70 @@
 	
 }
 
+.div-basic{
+   border:1px solid #cccccc;	
+  background:#F2F2F2;	
+}
+
+.help-block{
+	color:#595959;
+	font-size:.8em;
+}
+
+
+a{
+   outline: 0;
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+*:focus{
+	outline:0;
+}
+
+
+fieldset{
+
+	border:none;
+	margin:5px 0px 5px 0px;
+	padding:2px 0px 2px 0px;
+
+	*{
+	    margin-top:7px;
+	    margin-bottom:7px;
+	}
+
+}
+
+textarea,input[type=text],input[type=password]{
+	
+	@include border-radius(5px);
+	border: 1px solid #999;
+	display:block;
+	@include single-box-shadow($black, 0px, 0px, 3px, false, true);
+	
+}
+
+input[type=text],input[type=password]{
+	font-size:1.2em;
+	padding-left:8px;
+	padding-right:8px;
+}
+
+select:focus,input[type=password]:focus,input[type=text]:focus{
+	@include single-box-shadow($purplishred,0px ,0px,5px,false,false);
+}
+
+select,option{
+	background:#ffffff;
+	@include border-radius(5px);
+	font-size:1.2em;
+}
 
 
 
-
+// All other controllers scss partials
+@import "session";
+@import "user";

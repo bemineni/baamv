@@ -1,6 +1,8 @@
 
 <a href="#myModal" onClick='change_display()' role="button" class="btn" data-toggle="modal"><%= image_tag image.file_url(:thumb).to_s %></a>
 
+application.html.erb
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -39,3 +41,92 @@
 
 </body>
 </html>
+
+
+_header.html.erb
+
+ <div> 
+  <li><%= link_to "Home" , root_path %></li>
+  <% if is_signedin? %>
+        <li class="active"> <%= link_to "Login",login_path %></li>
+  <% else %>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= "#{current_user.username}" %><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><%= link_to "Account details", current_user %></li>
+            <li class="divider"></li>
+            <li><%= link_to "Log out", logout_path, :method => :delete%></li>
+        </ul>
+        </li>
+  <% end %>
+</div>
+
+
+blog.html.erb
+/***********************************************Old 
+<div>
+  <div><h3> <%= blog.title %></h3></div>
+  <hr/>
+  <div>
+    <%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
+  </div>
+  
+  <% if blog.images.all.count > 0 %>
+  <hr/>
+  <div>
+    <h5>Images</h5>
+    <% blog.images.all.each do |image| %>
+        <%= link_to (image_tag image.file_url(:thumb).to_s ,:class=>"img-polaroid") , "baamvdialog", :class => 'dialogopener' ,:data=>{:src=>image.file_url(:show).to_s} %>
+        
+    <% end %> 
+  </div>
+    <% end %>
+    <hr/>
+  <% if blog.attachments.all.count > 0 %>
+  <div>
+    <h5>Attachements</h5>
+    <% blog.attachments.all.each do |attachment| %>
+        <%= link_to File.basename(attachment.file_url.to_s), attachment.file_url.to_s %>
+    <% end %> 
+  </div>
+    <hr/>
+    <% end %>
+  <div>
+    <div>
+      <% if current_user?(blog.user) %>
+        <%= link_to "Edit blog", edit_blog_path(blog) ,:class => "btn btn-primary"%>
+      <% end %>
+    </div>
+    <div>
+      <h5><%= blog.user.username %></h5>
+      <h5><%= blog.created_at %></h5>
+    </div>
+  </div>
+</div>
+
+home.html.erb
+<div >
+  <div >
+      
+  </div>
+  
+  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div >
+    <button type="button" data-dismiss="modal" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+
+        <img id="image-id" src="">
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+  <div class="well span3">
+    <% if !is_signedin? %>
+      <%= link_to "Post new blog", new_blog_path ,:class => "btn btn-primary"%>
+    <% end %>
+    <div> Other suggestions go here </div>
+  </div>
+</div>

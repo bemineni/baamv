@@ -1,39 +1,48 @@
-<div>
-	<div><h3> <%= blog.title %></h3></div>
-	<hr/>
+<div id="right">
+    <ul id="share">
+    	<li><a class="button button-normal" href="#"><i class="icon-twitter"></i>twitter</a></li>
+        <li><a class="button button-normal" href="#"><i class="icon-facebook"></i>facebook</a></li>
+    </ul>
+    <div class="side-box">
+    	<div class="side-heading"><span>check this out</span></div>
+        <ol>
+            <li><div><a href="#">Other link 1</a></div></li>
+            <li ><div><a href="#">Other link 1</a></div></li>
+            <li ><div><a href="#">Other link 1</a></div></li>
+            <li class="last-item"><div><a href="#">Other link 1</a></div></li>
+        </ol>
+    </div>
+</div>
+
+<div id="left">
+    <div class="banner"><h1> <%= blog.title %> </h1><h4>  <%= blog.user.lastname + ',' + blog.user.firstname %>  </h4><i> <%= blog.created_at %> </i></div>
+	<%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
 	<div>
-		<%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
-	</div>
-	
-	<% if blog.images.all.count > 0 %>
-	<hr/>
-	<div>
-		<h5>Images</h5>
-		<% blog.images.all.each do |image| %>
-		    <%= link_to (image_tag image.file_url(:thumb).to_s ,:class=>"img-polaroid") , "baamvdialog", :class => 'dialogopener' ,:data=>{:src=>image.file_url(:show).to_s} %>
-		    
-		<% end %> 
-	</div>
-    <% end %>
-    <hr/>
-	<% if blog.attachments.all.count > 0 %>
-	<div>
-		<h5>Attachements</h5>
-		<% blog.attachments.all.each do |attachment| %>
-		    <%= link_to File.basename(attachment.file_url.to_s), attachment.file_url.to_s %>
-		<% end %> 
-	</div>
-    <hr/>
-    <% end %>
-	<div>
-		<div>
 			<% if current_user?(blog.user) %>
 			  <%= link_to "Edit blog", edit_blog_path(blog) ,:class => "btn btn-primary"%>
 			<% end %>
-		</div>
-		<div>
-			<h5><%= blog.user.username %></h5>
-			<h5><%= blog.created_at %></h5>
-		</div>
 	</div>
+
+    <% if blog.attachments.all.count > 0 %>
+      	<div class="attachements">
+           	<h3>Attachements</h3>
+           	<ul>
+           		<% blog.images.all.each do |image| %>
+	    			<li><%= link_to (image_tag image.file_url(:thumb).to_s ,:class=>"img-polaroid") , "baamvdialog", :class => 'dialogopener' ,:data=>{:src=>image.file_url(:show).to_s} %></li>
+				<% end %> 
+            </ul>
+        </div>
+    <% end %>
+
+    <% if blog.images.all.count > 0 %>
+      	<div class="images">
+           	<h3>Images</h3>
+           	<ul>
+           		<% blog.images.all.each do |image| %>
+		    		<li><%= link_to (image_tag image.file_url(:thumb).to_s ,:class=>"img-polaroid") , "baamvdialog", :class => 'dialogopener' ,:data=>{:src=>image.file_url(:show).to_s} %></li>
+		    
+				<% end %> 
+           	</ul>
+   	    </div>
+   	 <% end %>
 </div>
