@@ -39,6 +39,7 @@
         var height = $(this).parent().outerHeight() + 1;
         $("ul",$(this).parent()).css('top',  height.toString() + 'px');
         $("ul",$(this).parent()).slideDown('fast');
-        event.stopPropagation();
+        if($(this).parent().hasClass("menu-heading"))
+            event.stopPropagation();
    });
 });

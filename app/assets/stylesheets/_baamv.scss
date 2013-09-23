@@ -66,6 +66,16 @@
 	color:$orange-dark;
 }
 
+.depth-line-top{
+   	@include single-box-shadow(white, 0px, 1px, 0px, false, true);
+   	border-top: 1px solid rgb(187, 187, 187);
+}
+
+.depth-line-bottom{
+   	@include single-box-shadow(white, 0px, 1px, 0px, false, false);
+   	border-bottom: 1px solid rgb(187, 187, 187);
+}
+
 
 #izmenu
 {
@@ -224,12 +234,12 @@
 
 
 .button-small{
-    padding:5px 5px 5px 5px;
+    padding:5px 10px 5px 10px;
 	font-size:5em;
 }
 
 .button-medium{
-    padding:7px 7px 7px 7px;
+    padding:7px 10px 7px 10px;
 	font-size:.9em;
 }
 
@@ -452,7 +462,7 @@
 
 .div-basic{
    border:1px solid #cccccc;	
-  background:#F2F2F2;	
+   background:#F2F2F2;	
 }
 
 .help-block{
@@ -492,8 +502,7 @@ textarea,input[type=text],input[type=password]{
 	@include border-radius(5px);
 	border: 1px solid #999;
 	display:block;
-	@include single-box-shadow($black, 0px, 0px, 3px, false, true);
-	
+	@include box-shadow(0px 1px 0px white, 0px 1px 3px 0px rgba(0, 0, 0, 0.5) inset);
 }
 
 input[type=text],input[type=password]{
@@ -503,13 +512,17 @@ input[type=text],input[type=password]{
 }
 
 select:focus,input[type=password]:focus,input[type=text]:focus{
-	@include single-box-shadow($purplishred,0px ,0px,5px,false,false);
+	@include single-box-shadow($purplishred,0px ,0px,3px,false);
 }
 
 select,option{
 	background:#ffffff;
 	@include border-radius(5px);
 	font-size:1.2em;
+}
+
+h2{
+	padding:5px 0 5px 0;
 }
 
 

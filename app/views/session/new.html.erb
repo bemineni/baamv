@@ -1,11 +1,7 @@
 <% provide(:title, "Login to your account") %>
 <div id="login-box">
-<h1> Login </h1>
-<div style="height:10px;">
-</div>
-
-
-	<%= form_for(:session, url: session_index_path) do |f| %>
+<h2 class="depth-line-bottom"> Login </h2>
+<%= form_for(:session, url: session_index_path) do |f| %>
 	<div >
 		<fieldset>
         	<div >
@@ -24,11 +20,9 @@
         	</div>
     	</fieldset>
         <fieldset>
-    	   <button type="submit" class="button button-normal button-medium">Submit</button>
-    	   <button type="button" class="button button-normal button-medium">Cancel</button>
+    	   <button type="submit" class="button button-normal button-medium">Login</button>
         </fieldset>
     	<p>New user? <%= link_to "Sign up now!", signup_path %></p>
-    	
 	</div>
 </div>
 	<% end %>
