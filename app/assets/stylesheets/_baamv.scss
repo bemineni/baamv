@@ -172,11 +172,12 @@
 	float:right;
 	width:350px;
 	padding-left: 20px;
+
 }
 
-#share
+.horizontal-buttons-list
 {
-    margin:0px;
+    margin:10px 0 0 0;
     padding:0px;
     list-style:none;
 	li
@@ -215,12 +216,12 @@
 
 .button
 {
-	@include border-rounded(4);
+	@include border-rounded(2);
 	white-space: nowrap;
 	cursor:pointer;
 	display:inline-block;
 	color:white;
-	@include shadow-inner(0,-3,10,0.20);
+	@include shadow-inner(0,-3,10,0.10);
 	text-shadow:0 1px 0 rgba(0,0,0,0.35);
 	text-decoration:none;
 	vertical-align:middle;
@@ -256,6 +257,14 @@
 	&:hover{
 		background-color:#2E7799;
 	}
+}
+
+.button-warning{
+   background-color:$orange-brown;
+   border:1px solid $orange-brown;
+	&:hover{
+		background-color:$orange-dark;
+	}	
 }
 
 
@@ -513,6 +522,7 @@ input[type=text],input[type=password]{
 
 select:focus,input[type=password]:focus,input[type=text]:focus{
 	@include single-box-shadow($purplishred,0px ,0px,3px,false);
+	border:1px solid $red-dark;
 }
 
 select,option{

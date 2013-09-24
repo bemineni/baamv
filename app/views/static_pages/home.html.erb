@@ -1,8 +1,11 @@
 <%= provide(:title , "Home") %>
 <div id="right">
-    <ul id="share">
-    	<li><a class="button button-normal button-large" href="#"><i class="icon-twitter"></i>twitter</a></li>
-        <li><a class="button button-normal button-large" href="#"><i class="icon-facebook"></i>facebook</a></li>
+    <ul class="horizontal-buttons-list" style="margin:0;">
+        <li>
+            <% if !is_signedin? %>
+                <%= link_to "Post new blog", new_blog_path ,:class => "button button-warning button-large" %>
+            <% end %>
+        </li>
     </ul>
     <div class="side-box">
     	<div class="side-heading"><span>check this out</span></div>
@@ -13,6 +16,11 @@
             <li class="last-item"><div><a href="#">Other link 1</a></div></li>
         </ol>
     </div>
+
+    <ul class="horizontal-buttons-list">
+        <li><a class="button button-normal button-large" href="#"><i class="icon-twitter"></i>twitter</a></li>
+        <li><a class="button button-normal button-large" href="#"><i class="icon-facebook"></i>facebook</a></li>
+    </ul>
 </div>
 
 <div id="left">
