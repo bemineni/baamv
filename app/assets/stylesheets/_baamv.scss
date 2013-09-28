@@ -4,45 +4,129 @@
 
 @import "compass/css3/border-radius";
 
+//**********************************************************************************************
+//	HTML
+//**********************************************************************************************
 
-//body{
-//	background-color:#F2F2F2;
-//	@include white-3d-radial;
-//}
+a{
+   outline: 0;
+}
 
-.red-line
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+*:focus{
+	outline:0;
+}
+
+
+fieldset{
+
+	border:none;
+	margin:5px 0px 5px 0px;
+	padding:2px 0px 2px 0px;
+
+	*{
+	    margin-top:7px;
+	    margin-bottom:7px;
+	}
+
+}
+
+textarea,input[type=text],input[type=password]{
+	
+	@include border-radius(5px);
+	border: 1px solid #999;
+	display:block;
+	@include box-shadow(0px 1px 0px white, 0px 1px 3px 0px rgba(0, 0, 0, 0.5) inset);
+}
+
+textarea{
+   	font-size:1.2em;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:8px;
+}
+
+input[type=text],input[type=password]{
+	font-size:1.2em;
+	padding-left:8px;
+	padding-right:8px;
+}
+
+select:focus,input[type=password]:focus,input[type=text]:focus{
+	@include single-box-shadow($purplishred,0px ,0px,3px,false);
+	border:1px solid $red-dark;
+}
+
+select,option{
+	background:#ffffff;
+	@include border-radius(5px);
+	font-size:1.2em;
+}
+
+h2{
+	padding:5px 0 5px 0;
+}
+
+
+
+//**********************************************************************************************
+//	Utilities
+//**********************************************************************************************
+
+.button
 {
-   min-height:4px;
-   background-color:$red;
+	@include border-rounded(2);
+	white-space: nowrap;
+	cursor:pointer;
+	display:inline-block;
+	color:white;
+	@include shadow-inner(0,-3,10,0.10);
+	text-shadow:0 1px 0 rgba(0,0,0,0.35);
+	text-decoration:none;
+	vertical-align:middle;
+	outline:none;
+	&:hover
+	{
+	   color:#ffffff;
+	}
 }
 
-#nav-bar { 
-    @include  black-matte; 
-	@include size(100%,50px);
-	@include shadow(0,-3,10,0.75);
-	position:relative;
+
+
+.button-small{
+    padding:5px 10px 5px 10px;
+	font-size:.5em;
 }
 
-#container{
-	@include border-rounded(5);
-	margin:10px 50px 20px 50px;
-
+.button-medium{
+    padding:7px 10px 7px 10px;
+	font-size:.9em;
 }
 
-#main{
-    float:left;
-	margin-top:5px;
-	@include border-rounded(4);
-	width:100%;
+.button-large{
+    padding:10px 10px 10px 10px;
+	font-size:1.2em;
 }
 
-.alert{
-	@include border-rounded(4);
-	@include single-text-shadow;
-	border-style:solid;
-	border-width:1px;
-	margin:10px 0 10px 0;
-	padding : 10px 10px 10px 10px;
+
+.button-normal
+{
+	background-color:$blue;
+	border:1px solid $blue;
+	&:hover{
+		background-color:#2E7799;
+	}
+}
+
+.button-warning{
+   background-color:$orange-brown;
+   border:1px solid $orange-brown;
+	&:hover{
+		background-color:$orange-dark;
+	}	
 }
 
 .alert-success{
@@ -76,6 +160,78 @@
    	border-bottom: 1px solid rgb(187, 187, 187);
 }
 
+.alert{
+	@include border-rounded(4);
+	@include single-text-shadow;
+	border-style:solid;
+	border-width:1px;
+	margin:10px 0 10px 0;
+	padding : 10px 10px 10px 10px;
+}
+
+.horizontal-buttons-list
+{
+    margin:10px 0 0 0;
+    padding:0px;
+    list-style:none;
+	li
+	{
+	    display:inline-block;
+	}		
+}
+
+.ico
+{
+	border:1px solid $white;
+	@include border-rounded(4);
+	display:inline-block;
+	@include shadow-inner(0,-3,10,0.20);
+	text-shadow:0 1px 0 rgba(0,0,0,0.35);
+	text-decoration:none;
+	color:white;
+	width:36px;
+	text-align:center;
+	i:before
+	{
+		margin-right:auto;
+		margin-left:auto;
+		display:inline-block;
+	}
+	
+}
+
+.div-basic{
+   border:1px solid #cccccc;	
+   background:#F2F2F2;	
+   @include border-rounded(3);
+}
+
+
+
+
+//**********************************************************************************************
+//	General
+//**********************************************************************************************
+
+.red-line
+{
+   min-height:4px;
+   background-color:$red;
+}
+
+
+#nav-bar { 
+    @include  black-matte; 
+	@include size(100%,50px);
+	@include shadow(0,-3,10,0.75);
+	position:relative;
+}
+
+#container{
+	@include border-rounded(5);
+	margin:10px 50px 20px 50px;
+
+}
 
 #izmenu
 {
@@ -88,6 +244,14 @@
         margin:0 0 0 0;
         padding:0 0 0 0;
 	    list-style:none;
+	    > li.first , >li.first > a {
+	      @include border-top-left-radius(4px);
+	      @include border-bottom-left-radius(4px);
+	    }
+	    > li.last ,>li.last > a{
+	         @include border-top-right-radius(4px);
+	         @include border-bottom-right-radius(4px);
+	    }
 
     }
     li
@@ -96,6 +260,7 @@
            margin:0 0 0 0;
            border-right:1px solid #A09D9D;
            min-width:125px;
+           background-color:$blue;
 	}
 
 	a 
@@ -153,265 +318,12 @@
 }
 
 
-
-#left{
-     
-     overflow:hidden;
-     border:1px solid #cccccc;
-
-     p 
-     {
-       padding:10px 10px 10px 10px;
-     }
-	
-}
-
-
-#right
-{
-	float:right;
-	width:350px;
-	padding-left: 20px;
-
-}
-
-.horizontal-buttons-list
-{
-    margin:10px 0 0 0;
-    padding:0px;
-    list-style:none;
-	li
-	{
-	    display:inline-block;
-	}		
-}
-
-
-.banner
-{
-	border:1px solid #cccccc;	
-	background:#F2F2F2;
-	padding-top:40px;
-	padding-bottom:40px;
-	padding-left:40px;
-	h1
-	{
-	     margin:0px;
-	}
-	h4{
-	     margin:0px;
-	}
-	h5{
-	     margin:0px;
-	}
-	i
-	{
-	    margin:2px;
-		font-size:.7em;
-		color:#969696;
-	}
-}
-
-
-
-.button
-{
-	@include border-rounded(2);
-	white-space: nowrap;
-	cursor:pointer;
-	display:inline-block;
-	color:white;
-	@include shadow-inner(0,-3,10,0.10);
-	text-shadow:0 1px 0 rgba(0,0,0,0.35);
-	text-decoration:none;
-	vertical-align:middle;
-	outline:none;
-	&:hover
-	{
-	   color:#ffffff;
-	}
-}
-
-
-
-.button-small{
-    padding:5px 10px 5px 10px;
-	font-size:5em;
-}
-
-.button-medium{
-    padding:7px 10px 7px 10px;
-	font-size:.9em;
-}
-
-.button-large{
-    padding:10px 10px 10px 10px;
-	font-size:1.2em;
-}
-
-
-.button-normal
-{
-	background-color:$blue;
-	border:1px solid $blue;
-	&:hover{
-		background-color:#2E7799;
-	}
-}
-
-.button-warning{
-   background-color:$orange-brown;
-   border:1px solid $orange-brown;
-	&:hover{
-		background-color:$orange-dark;
-	}	
-}
-
-
 .footer { 
     @include  black-matte; 
 	@include size(100%,100%);
 	@include shadow(0,-3,10,0.40);
     height:400px;
     margin-top:20px;
-}
-
-.side-box{
-    border:1px solid #A09D9D;
-    margin-top:3.5em;
-	background:#E0E0E0;
-	position:relative;
-	ol
-	{
-	   list-style:none;
-	   margin-left:0px;
-	   margin-top:0px;
-	   margin-bottom:0px;
-	   padding:0;
-	   li
-	   {
-	      //margin-top:3px;
-	      border-bottom:1px solid #666464;
-	      padding-left:5px;
-
-	      div
-	      {
-	          padding: 3px;
-	          background:#E0E0E0;
-	      }
-	   }
-
-	   .last-item
-	   {
-	      border-bottom:none;
-	   }
-	}
-
-
-
-	a
-	{
-	   text-decoration:none;
-	   color:$blue;
-	   line-height:2.5em;
-	}
-}
-
-.side-heading{
-	background:$black1;
-	display:inline-block;
-	color:#ffffff;
-	line-height:2.5em;
-	padding-left:10px;
-	padding-right:10px;
-	position:absolute;
-	top:-2.5em;
-	left:-1px;
-	@include border-rounded-top(3);
-	@include shadow-inner(0,-3,10,0.20);
-}
-
-
-.highlight-active
-{
-   
-	background:$purplishred;
-}
-
-
-.attachements{
-    margin-left:10px;
-    margin-right:10px;
-    border-top:1px solid #cccccc;
-    h3
-    {
-       padding:0px 10px 0px 10px; 
-       color:$black;
-       margin:0px;
-
-    }
-    ul{
-
-       padding:0px 10px 0 10px;
-       list-style:none;
-       
-       li
-       {
-          margin:0px;
-       }
-    }
-    
-	a
-	{
-	     text-decoration:none;
-	}
-}
-
-.images{
-    margin-top:10px;
-    margin-left:10px;
-    margin-bottom:10px;
-    margin-right:10px;
-    border-top:1px solid #cccccc;
-    h3
-    {
-       padding:0px 10px 0px 10px;
-       color:$black;
-       margin:0px;
-    }
-    ul{
-
-       padding:0px 10px 0 10px;
-       list-style:none;
-
-       li
-       {
-          margin:0px;
-          display:inline-block;
-          padding-right:10px;
-       }
-    }
-    
-	a
-	{
-	     text-decoration:none;
-	}
-
-	a:hover
-	{
-	   img 
-	   {
-	       	@include shadow(0,0,10,0.40);
-	   }
-	}
-	img
-	{
-	   height:100px;
-	   width:100px;
-	   border:1px solid #A09D9D;
-	}
-    
-
 }
 
 #footer-content
@@ -449,30 +361,94 @@
 
 }
 
-.ico
-{
-	border:1px solid $white;
+
+//**********************************************************************************************
+//	Home
+//**********************************************************************************************
+
+#main{
+    float:left;
+	margin-top:5px;
 	@include border-rounded(4);
-	display:inline-block;
-	@include shadow-inner(0,-3,10,0.20);
-	text-shadow:0 1px 0 rgba(0,0,0,0.35);
-	text-decoration:none;
-	color:white;
-	width:36px;
-	text-align:center;
-	i:before
-	{
-		margin-right:auto;
-		margin-left:auto;
-		display:inline-block;
-	}
-	
+	width:100%;
 }
 
-.div-basic{
-   border:1px solid #cccccc;	
-   background:#F2F2F2;	
+#left{  
+     overflow:hidden;
+     
+     p 
+     {
+       padding:10px 10px 10px 10px;
+     }
 }
+
+
+#right{
+	float:right;
+	width:350px;
+	padding-left: 20px;
+}
+
+
+.side-box{
+    border:1px solid #A09D9D;
+    margin-top:3.5em;
+	background:#E0E0E0;
+	position:relative;
+	ol
+	{
+	   list-style:none;
+	   margin-left:0px;
+	   margin-top:0px;
+	   margin-bottom:0px;
+	   padding:0;
+	   li
+	   {
+	      //margin-top:3px;
+	      border-bottom:1px solid #666464;
+	      padding-left:5px;
+
+	      div
+	      {
+	          padding: 3px;
+	          background:#E0E0E0;
+	      }
+	   }
+
+	   .last-item
+	   {
+	      border-bottom:none;
+	   }
+	}
+	a
+	{
+	   text-decoration:none;
+	   color:$blue;
+	   line-height:2.5em;
+	}
+}
+
+.side-heading{
+	background:$black1;
+	display:inline-block;
+	color:#ffffff;
+	line-height:2.5em;
+	padding-left:10px;
+	padding-right:10px;
+	position:absolute;
+	top:-2.5em;
+	left:-1px;
+	@include border-rounded-top(3);
+	@include shadow-inner(0,-3,10,0.20);
+}
+
+.highlight-active
+{
+   
+	background:$purplishred;
+}
+
+
 
 .help-block{
 	color:#595959;
@@ -480,63 +456,7 @@
 }
 
 
-a{
-   outline: 0;
-}
-
-input::-moz-focus-inner { 
-  border: 0; 
-}
-
-*:focus{
-	outline:0;
-}
-
-
-fieldset{
-
-	border:none;
-	margin:5px 0px 5px 0px;
-	padding:2px 0px 2px 0px;
-
-	*{
-	    margin-top:7px;
-	    margin-bottom:7px;
-	}
-
-}
-
-textarea,input[type=text],input[type=password]{
-	
-	@include border-radius(5px);
-	border: 1px solid #999;
-	display:block;
-	@include box-shadow(0px 1px 0px white, 0px 1px 3px 0px rgba(0, 0, 0, 0.5) inset);
-}
-
-input[type=text],input[type=password]{
-	font-size:1.2em;
-	padding-left:8px;
-	padding-right:8px;
-}
-
-select:focus,input[type=password]:focus,input[type=text]:focus{
-	@include single-box-shadow($purplishred,0px ,0px,3px,false);
-	border:1px solid $red-dark;
-}
-
-select,option{
-	background:#ffffff;
-	@include border-radius(5px);
-	font-size:1.2em;
-}
-
-h2{
-	padding:5px 0 5px 0;
-}
-
-
-
 // All other controllers scss partials
 @import "session";
 @import "user";
+@import "blog"
