@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #All common gems
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.16'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'rvm-capistrano'
@@ -18,6 +18,12 @@ gem 'carrierwave'
 gem 'libv8'
 #Use unicorn as app server
 gem 'unicorn'
+gem 'less'
+gem 'less-rails'
+gem 'coffee-rails'
+gem 'coffee-script'
+gem 'tire'
+gem 'redcarpet'
 
 # Gems used only fior assets and not required
 # in production environments by default.
@@ -28,7 +34,6 @@ group :assets do
   gem 'therubyracer', '0.10.2',:platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-
   gem 'compass-rails'
 end
 
@@ -46,7 +51,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'factory_girl_rails'
   gem 'cucumber-rails', '1.2.1', require: false
   gem 'database_cleaner', '0.7.0'
 end

@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: baamv_development
   pool: 5
-  username: baamv
-  password: rootpwd
+  username: iamzero
+  password: zerorules
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -27,8 +27,8 @@ test:
   reconnect: false
   database: baamv_test
   pool: 5
-  username: baamv
-  password: rootpwd
+  username: iamzero
+  password: zerorules
   host: localhost
 
 production:
@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: baamv
   pool: 5
-  username: baamv
-  password: rootpwd
+  username: iamzero
+  password: z3r0rul3sPr0duKsion!
   host: localhost

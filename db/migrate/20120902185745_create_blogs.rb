@@ -3,9 +3,10 @@ class CreateBlogs < ActiveRecord::Migration
     create_table :blogs do |t|
 
     	t.string :title
-    	t.string :body
+    	t.text :body
     	t.integer :author
     	t.integer :views
+    	t.boolean :published 
       	t.timestamps
     end
   end

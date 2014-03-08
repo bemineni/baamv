@@ -1,38 +1,119 @@
+set :rails_root, "#{File.dirname(__FILE__)}/.."  #get rails root
 
-require 'capistrano'
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 require "bundler/capistrano"
-# Load RVM's capistrano plugin.    
-require "rvm/capistrano"
-require 'capistrano/cli'
+# Disbale this if you are deploying for the first time
+load 'deploy/assets'
 
-#set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-set :rvm_ruby_string,"1.9.3"
-set :deploy_to, "/web_apps/iamzero"
 set :application, "iamzero"
-set :scm, :git
-set :repository,  "git@github.com:bemineni/baamv.git"
-set :branch, "master"
-set :user , "iamzero"
-set :rvm_type, :user
-set :scm_passphrase, "srikanth"  # The deploy user's password
-set :deploy_via, :remote_cache
-set :use_sudo, false
-set :rails_env, :production
-set :unicorn_binary, "unicorn"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+set :rvm_ruby_string, '1.9.3'        # Or whatever env you want it to run in.
 
+default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+set :repository, "git@github.com:bemineni/baamv.git"  # Your clone URL 
+set :scm, "git"
+set :user, "iamzero"  # The server's user for deploys
 
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "#{application}")]
+set :branch, "master"
+set :deploy_via, :remote_cache
+set :deploy_to, "/web_apps/#{application}"
+set :host_header, "iamzero.in"
+set :use_sudo, false
+set :fresh_install, false
 
-set :linode, "173.255.227.60"  # The deploy user's password
+require "#{rails_root}/lib/unicorn/capistrano"
+require "#{rails_root}/lib/nginx/capistrano"
 
-role :web, linode                        # Your HTTP server, Apache/etc
-role :app, linode                          # This may be the same as your `Web` server
-role :db,  linode, :primary => true # This is where Rails migrations will run
 
+set :amazonaws, fetch(:amazonaws,"ec2-23-20-253-249.compute-1.amazonaws.com")
+
+role :web, amazonaws
+role :app, amazonaws
+role :db,  amazonaws, :primary => true
+
+before "deploy:setup", "deploy:create_release_dir"
+namespace :deploy do
+  desc "This creates the release directory for the first time setup"
+  task :create_release_dir, :except => {:no_release => true} do
+    sudo "rm -fr #{deploy_to}"
+    sudo "mkdir -p #{deploy_to}"
+    sudo "chown -R bemineni:bemineni #{deploy_to}"
+    run "mkdir -p #{fetch :releases_path}"
+  end
+end
+
+namespace :baamv do
+
+  desc 'Deploying baamv for the first time'
+  task :new_deploy do
+    set :fresh_install,true
+    deploy.setup
+    # application.rb and checkin
+    #The assets:precompile process is part of the deploy.update. Before the precompile process, we will create database.
+    deploy.update
+    deploy.migrate
+    run_seed
+    unicorn.reload
+  end
+
+
+  desc 'Load DB schema - CAUTION: rewrites database'
+  task :load_schema, :roles => :app do
+    if Capistrano::CLI.ui.ask("About to `rake db:schema:load`. Are you sure to wipe the entire database (anything other than 'yes' aborts):") != 'yes'
+      raise RuntimeError.new('db:schema:load aborted!')
+    end
+    run "cd #{release_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
+  end
+
+  desc 'Create a new database'
+  task :create_database, :roles => :app do
+     if fresh_install 
+        run "cd #{release_path}; bundle exec rake db:create RAILS_ENV=#{rails_env}"
+      end
+  end
+
+  desc 'Seed data'
+  task :run_seed, :roles => :app do
+      #copy geolite from the lib/geolite.Please see that we update this 
+      #frequently from http://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip
+      path = current_path
+      path ||= release_path
+      #run "rm -fr /tmp/GeoLiteCity_*;rm -fr /tmp/GeoLiteCity*.*"
+      #run "cd #{path}; cp -f lib/geolite/GeoLiteCity-latest.zip /tmp;cd /tmp; unzip GeoLiteCity-latest.zip ; cd GeoLiteCity_* ; mv *.* /tmp"
+      #run "cd #{path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
+  desc 'Generate deployment timestamp'
+  task :generate_timestamp, :roles => :app do
+    path = current_path
+    path ||= release_path
+    run "cd #{path};bundle exec rake util:generate_timestamp RAILS_ENV=#{rails_env}"
+  end
+
+  desc 'Clean complete database. This will remove all the records'
+  task :clean_database, :roles => :app do
+      path = current_path
+      path ||= release_path
+     run "cd #{path};bundle exec rake util:clean_database RAILS_ENV=#{rails_env}"
+  end
+
+  desc "Create photos upload symlink"
+  task :symlink ,:roles => :app do
+    path = current_path
+    path ||= release_path
+    run "rm -rf #{path}/public/uploads"
+    run "mkdir -p #{shared_path}/uploads"
+    run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
+  end
+
+
+end
+
+before 'unicorn:reload' , 'baamv:generate_timestamp'
+after "deploy:update_code", "baamv:symlink"
+before "deploy:assets:precompile" , "baamv:create_database"
+#Name space ends here
 
 def remote_file_exists?(full_path)
   'true' ==  capture("if [ -e #{full_path} ]; then echo 'true'; fi").strip
@@ -43,99 +124,18 @@ def process_exists?(pid_file)
     capture("ps -p $(cat #{pid_file}) ; true").strip.split("\n").size == 2
 end
 
-
-
-namespace :baamv do
-
-	task :default, :roles => :app do
-		deploy.update
-		
-	end
-
-    desc "Install Boot strap"
-	task :bootstrap , :roles => :app do
-		run "cd #{deploy_to}/current/ ; rails g  bootstrap:install -f"
-	end
-
-	desc "Start nginx server"
-	task :nginx_restart , :roles => :app do
-		set :sudo_password, proc{ Capistrano::CLI.password_prompt("Type your sudo password #{user}: ") }
-#		run "rvmsudo service nginx restart"
-		run "/sbin/service --status-all"
-	end
-
-	desc "Shows all the files in the directory"
-	task :show , :roles => :app do 
-		run "ls -al"
-	end
-
-	desc "Clear gem lock file"
-	task :show , :roles => :app do 
-		if remote_file_exists?( "#{deploy_to}/current/Gemfile.lock" )
-			 run "rm -fr #{deploy_to}/current/Gemfile.lock"
-		end
-	end
-
-	desc "Run bundler"
-	task :bundler, :roles => :app  do
-		run "bundle install"
-	end
-
-
-end
-
-
-
-
-namespace :unicorn do
-
-	task :start, :roles => :app, :except => { :no_release => true } do
-
-		run "cd #{current_path} && bundle exec #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
-
-	end
-
-	task :stop, :roles => :app, :except => { :no_release => true } do
-
-		run "kill `cat #{unicorn_pid}`"
-
-	end
-
-	task :graceful_stop, :roles => :app, :except => { :no_release => true } do
-
-		run "#kill -s QUIT `cat #{unicorn_pid}`"
-
-	end
-
-	task :reload, :roles => :app, :except => { :no_release => true } do
-
-		run "#kill -s USR2 `cat #{unicorn_pid}`"
-
-	end
-
-	task :restart, :roles => :app, :except => { :no_release => true } do
-
-		if remote_file_exists? "#{unicorn_pid}"
-			if process_exists? "#{unicorn_pid}"
-				stop
-			end
-		end
-
-		start
-	end
-end
-
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
+#disable this is you are deploying for the first time.
+#snippet to ease the deployment of assets
 # namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+#    namespace :assets do
+#      task :precompile, :roles => :web, :except => { :no_release => true } do
+#        #get the latest revision of the assets folder to check if it needs deployed again
+#        from = source.next_revision(current_revision)
+#        if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+#          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+#        else
+#          logger.info "Skipping asset pre-compilation because there were no asset changes"
+#        end
+#      end
+#    end
+#  end

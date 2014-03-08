@@ -3,9 +3,10 @@ class CreateStates < ActiveRecord::Migration
     create_table :states do |t|
       t.string :name
       t.string :code
-      t.string :countrycode
+      t.integer :country_id
 
       t.timestamps
     end
+    add_index :states , [:country_id]
   end
 end

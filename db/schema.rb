@@ -14,13 +14,13 @@
 ActiveRecord::Schema.define(:version => 20120930222646) do
 
   create_table "attachments", :force => true do |t|
+    t.string   "name"
     t.text     "description"
     t.string   "file"
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "name"
   end
 
   add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(:version => 20120930222646) do
     t.text     "body"
     t.integer  "author"
     t.integer  "views"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "published",  :default => false
+    t.boolean  "published"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "countries", :force => true do |t|
@@ -57,14 +57,15 @@ ActiveRecord::Schema.define(:version => 20120930222646) do
   create_table "states", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.integer  "country_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "country_id"
   end
 
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
 
   create_table "users", :force => true do |t|
+    t.string   "username"
     t.string   "firstname"
     t.string   "lastname"
     t.string   "initial"
@@ -77,12 +78,11 @@ ActiveRecord::Schema.define(:version => 20120930222646) do
     t.string   "email"
     t.string   "phone"
     t.string   "mobile"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "password_digest"
     t.string   "verify_key"
     t.string   "remember_token"
-    t.string   "username"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
