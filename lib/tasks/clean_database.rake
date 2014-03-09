@@ -3,7 +3,7 @@ namespace :util  do
 	desc "Rake task to clean all the database records"
 	task :clean_database => :environment do 
 		ActiveRecord::Base.establish_connection
-		%w(ad_listings users messages cities photos categories listing_payments payments professions specialties states).each do |table|
+		%w(users blogs images countries states attachments).each do |table|
            ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table}") rescue ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
 		end
 	end

@@ -15,7 +15,7 @@ set :user, "iamzero"  # The server's user for deploys
 
 ssh_options[:forward_agent] = true
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "#{application}")]
-set :branch, "master"
+set :branch, "new_ui"
 set :deploy_via, :remote_cache
 set :deploy_to, "/web_apps/#{application}"
 set :host_header, "iamzero.in"
