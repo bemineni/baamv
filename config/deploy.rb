@@ -38,7 +38,7 @@ namespace :deploy do
   task :create_release_dir, :except => {:no_release => true} do
     sudo "rm -fr #{deploy_to}"
     sudo "mkdir -p #{deploy_to}"
-    sudo "chown -R bemineni:bemineni #{deploy_to}"
+    sudo "chown -R iamzero:web #{deploy_to}"
     run "mkdir -p #{fetch :releases_path}"
   end
 end
