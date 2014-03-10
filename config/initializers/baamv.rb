@@ -5,3 +5,8 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Baamv::Application.config.secret_token = '9fe4f1f5159e1a19a9817c0608483af55fbd9f3067912b49f3c08a7ba00ec471c1cf43aec46e6874ed86d6ac86c267c09875d6fb1c723f31f4aff6f243b959a8'
+
+#Version details
+Baamv::Application.config.baamv_version = "0.1"
+
+Baamv::Application.config.appname = "I am Zero"

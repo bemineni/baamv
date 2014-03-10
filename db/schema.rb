@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930222646) do
+ActiveRecord::Schema.define(:version => 20140309200537) do
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -65,27 +65,38 @@ ActiveRecord::Schema.define(:version => 20120930222646) do
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
 
   create_table "users", :force => true do |t|
+    t.string   "email",                                          :null => false
+    t.string   "crypted_password",                               :null => false
+    t.string   "salt",                                           :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
+    t.integer  "failed_logins_count",             :default => 0
+    t.datetime "lock_expires_at"
+    t.string   "unlock_token"
     t.string   "username"
     t.string   "firstname"
     t.string   "lastname"
-    t.string   "initial"
     t.string   "sex"
     t.text     "address"
     t.string   "city"
     t.integer  "state_id"
     t.integer  "country_id"
     t.string   "zip"
-    t.string   "email"
     t.string   "phone"
     t.string   "mobile"
-    t.string   "verify_key"
-    t.string   "remember_token"
-    t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
   end
 
+  add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+  add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
 
 end

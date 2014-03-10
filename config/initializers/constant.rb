@@ -1,1 +1,0 @@
-APPNAME = "I am Zero"

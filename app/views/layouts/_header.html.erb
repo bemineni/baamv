@@ -6,7 +6,7 @@
   <div id="izmenu"> 
     <ul>
       <li class="menu-heading first"><%= link_to(raw("<i class='icon-home'></i>home") , root_path) %></li>
-      <% if is_signedin? %>
+      <% if !logged_in? %>
           <li class="menu-heading last-item last"><%= link_to(raw("<i class='icon-user'></i>login"),login_path ) %></li>
       <% else %>
           <li class="menu-heading last-item last"><a href="#"><i class="icon-user"></i><%= "#{current_user.username}" %></a>

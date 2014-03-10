@@ -2,7 +2,7 @@
 <div id="right">
     <ul class="horizontal-buttons-list" style="margin:0;">
         <li>
-            <% if !is_signedin? %>
+            <% if logged_in? %>
                 <%= link_to "Post new blog", new_blog_path ,:class => "button button-warning button-large" %>
             <% end %>
         </li>

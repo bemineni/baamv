@@ -16,6 +16,7 @@ gem 'rmagick'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'libv8'
+gem 'sorcery'
 #Use unicorn as app server
 gem 'unicorn'
 gem 'less'
