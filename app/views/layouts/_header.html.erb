@@ -5,14 +5,23 @@
   <img id="logo" src= <%= asset_path('banner.png') %> width="342" height="100"></img>
   <div id="izmenu"> 
     <ul>
-      <li class="menu-heading first"><%= link_to(raw("<i class='icon-home'></i>home") , root_path) %></li>
+      <li class="menu-heading first"><%= link_to(root_path)  do %>
+          <i class='fa fa-home fa-fw'></i> Home
+          <% end %>
+      </li>
       <% if !logged_in? %>
-          <li class="menu-heading last-item last"><%= link_to(raw("<i class='icon-user'></i>login"),login_path ) %></li>
+          <li class="menu-heading last-item last"><%= link_to(login_path ) do %>
+             <i class='fa fa-user fa-fw'></i> Login
+            <% end %>
+          </li>
       <% else %>
-          <li class="menu-heading last-item last"><a href="#"><i class="icon-user"></i><%= "#{current_user.username}" %></a>
+          <li class="menu-heading last-item last"><a href="#"><i class="fa fa-user fa-fw"></i> <%= "#{current_user.username}" %></a>
             <ul class="popup-menu">
               <li><%= link_to(raw("<i class='icon-wrench'></i>Settings") , current_user  )%> </li>
-              <li class="last-item"><%= link_to(raw("<i class='icon-remove-sign'></i>logout"), logout_path, :method => :delete)%> </li>
+              <li class="last-item"><%= link_to(logout_path, :method => :delete ) do %> 
+                    <i class='fa fa-sign-out fa-fw'></i> Logout
+                 <% end %>
+              </li>
             </ul>
           </li>
       <% end %>

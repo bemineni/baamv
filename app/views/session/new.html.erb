@@ -1,13 +1,14 @@
 <% provide(:title, "Login to your account") %>
 <div id="login-box">
 <h2 class="depth-line-bottom"> Login </h2>
-<%= form_for(:session, url: session_index_path) do |f| %>
+<%= form_tag session_index_path do |f| %>
+   <%= hidden_field_tag :return_path, params[:return_path] %>
 	<div >
 		<fieldset>
         	<div >
             	<label >Email</label>
             	<div >
-                	<%= f.text_field :email , :size=>25%>
+                	<%= text_field_tag :email ,params[:email], :placeholder => "Enter email" , :type => "text" , :size=>25%>
             	</div>
         	</div>
     	</fieldset>
@@ -15,12 +16,12 @@
         	<div >
             	<label >Password</label>
             	<div >
-                	<%= f.password_field :password, :size=>25 %> 
+                	<%= password_field_tag :password, "", :placeholder => "Password" , :type => "password", :size=>25 %> 
             	</div>
         	</div>
     	</fieldset>
         <fieldset>
-            <%= check_box_tag :remember_me, 1, params[:remember_me] %><label>Remember Me</label>
+            <%= check_box_tag :remember_me, 1, params[:remember_me] %><label> Remember Me</label>
         </fieldset>
         <fieldset>
     	   <button type="submit" class="button button-normal button-medium">Login</button>

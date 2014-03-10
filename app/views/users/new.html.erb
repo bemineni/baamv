@@ -2,7 +2,7 @@
 <div id="new-user" class="div-basic">
 <h2>Sign Up</h2>
 <div class="well">
-<%=  form_for(@user) do |f| %>
+<%=  form_for @user, url: user_path do |f| %>
     <%= render 'shared/error_messages', :object => f.object %>
 
     <fieldset>
@@ -11,6 +11,16 @@
             <div class="controls">
                 <%= f.text_field :email %>
                 <p class="help-block">Please enter a valid email address</p>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label">Confirm email:</label>
+            <div class="controls">
+                <%= f.text_field :email_confirmation %>
+                <p class="help-block">Please re-enter the email address</p>
             </div>
         </div>
     </fieldset>

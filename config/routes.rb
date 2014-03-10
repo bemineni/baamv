@@ -8,9 +8,9 @@ Baamv::Application.routes.draw do
 
 
   #users methods
-  resources :users do
-    collection do
-      get 'verify'
+  resource :user do
+    member do
+      get 'activate'
     end
   end
 
@@ -33,7 +33,6 @@ Baamv::Application.routes.draw do
   
   
   
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

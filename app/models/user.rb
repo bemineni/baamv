@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  belongs_to :city
+  belongs_to :country
   belongs_to :state
   has_many :blogs , :foreign_key => :author, :dependent => :destroy
 

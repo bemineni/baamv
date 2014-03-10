@@ -12,16 +12,15 @@ class UsersController < ApplicationController
   def create
     
   	@user = User.new(params[:user])
+
   	if @user.save
 		  #This is a successful case
 		  flash[:success] = "Thank you for registering with #{Baamv::Application.config.appname}. \
                          Please check your email #{@user.email} to verify the newly created account"
 
-      Accountverification.verify(@user).deliver
-
-		  redirect_to @user
+		  redirect_to root_path
   	else
-  		render 'new'
+  		render :new
   	end
   end
 
@@ -34,19 +33,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def verify
+
+  def activate
     if (@user = User.load_from_activation_token(params[:token]))
       @user.activate!
     else
       not_authenticated
     end
-
-    # @user = User.find_by_verify_key(params[:key])
-    # @verified = false 
-    # if !@user.nil?
-    #   @user.update_attributes!( :verify_key => "0" )
-    #   @verified = true;
-    # end
   end
 
 
