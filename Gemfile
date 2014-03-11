@@ -17,6 +17,7 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'libv8'
 gem 'sorcery'
+gem 'exception_notification', '~> 2.6.1'
 #Use unicorn as app server
 gem 'unicorn'
 gem 'less'
