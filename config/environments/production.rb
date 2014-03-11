@@ -46,13 +46,9 @@ Baamv::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w(modernizr.js font-awesome.css)
+  config.assets.precompile += %w(modernizr.js)
 
   # for adding the fonts
-  config.assets.precompile += %w( .svg .eot .woff .ttf )
-
-  # Add the fonts path
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
   # Precompile additional assets
 
@@ -86,5 +82,10 @@ Baamv::Application.configure do
   user_name: "srikanth.bemineni@gmail.com",
   password: "sripriya21"
   }
+
+  config.middleware.use ExceptionNotifier,
+    sender_address: 'noreply@iamzero.com',
+    exception_recipients: 'bemineni.srikanth@gmail.com',
+    ignore_exceptions: ExceptionNotifier.default_ignore_exceptions
 
 end

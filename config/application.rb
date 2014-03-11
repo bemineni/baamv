@@ -58,6 +58,8 @@ module Baamv
 
     config.action_mailer.default_url_options = { :host => "localhost" ,:protocol => "http"}
 
+    config.assets.precompile += %w(modernizr.js)
+
     config.assets.precompile += %w( .svg .eot .woff .ttf )
 
     # Adding the below line makes the public/javascript folder 

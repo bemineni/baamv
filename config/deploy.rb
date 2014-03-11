@@ -79,9 +79,7 @@ namespace :baamv do
       #frequently from http://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip
       path = current_path
       path ||= release_path
-      #run "rm -fr /tmp/GeoLiteCity_*;rm -fr /tmp/GeoLiteCity*.*"
-      #run "cd #{path}; cp -f lib/geolite/GeoLiteCity-latest.zip /tmp;cd /tmp; unzip GeoLiteCity-latest.zip ; cd GeoLiteCity_* ; mv *.* /tmp"
-      #run "cd #{path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+      run "cd #{path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 
   desc 'Generate deployment timestamp'
