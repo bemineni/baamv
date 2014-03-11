@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
 	def new
 		#find if any old blogs that were not saved
 		#before and clean up.
-		@blog = current_user.blogs.build
+		@blog = current_user.blogs.build(:published=>true)
 		@blog.title = "Enter the blog title"
 		@blog.body = "Let your thoughts flow"
 		#just for testing

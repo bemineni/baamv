@@ -4,7 +4,7 @@
      <%= RedCloth.new(codeHighlight(blog.body)).to_html.html_safe %>
   </div>
 	<div class="blog-actions depth-line-top">
-			<% if current_user?(blog.user) %>
+			<% if current_user_is(blog.user) %>
 			  <%= link_to "Edit blog", edit_blog_path(blog) ,:class => "button button-normal button-medium"%>
 			<% end %>
 	</div>

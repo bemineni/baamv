@@ -13,6 +13,13 @@ class Blog < ActiveRecord::Base
   validates :title, presence: true
   validates :body, presence: true
 
+  before_save :set_published
+
+  def set_published
+    self.published=true
+    self.views=0
+  end
+
   def self.not_saved_blogs
   	where("created_at=updated_at").all
   end	

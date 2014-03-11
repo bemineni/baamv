@@ -12,6 +12,90 @@
 //	HTML
 //**********************************************************************************************
 
+.lotus-row{
+  *{
+    @include box-sizing(border-box);
+  }
+  min-height:1em;
+  &:after{
+    clear:both;
+    display:table;
+    content:" ";
+  }
+  &:before{
+    clear:both;
+    display:table;
+    content:" ";
+  }
+  div[class^="col"]{
+    display:block;
+    float:left;
+    min-width:10px;
+    @include box-sizing(border-box);
+    position:relative;
+  }
+  .col1{
+      width:8.33333%;
+      min-width:8.33333%;
+      max-width:8.33333%;
+  }
+  .col2{
+      width:16.66666%;
+      min-width:16.66666%;
+      max-width:16.66666%;
+  }
+  .col3{
+      width:25%;
+      min-width:25%;
+      max-width:25%;
+  }
+  .col4{
+      width:33.33333%;
+      min-width:33.33333%;
+      max-width:33.33333%;
+  }
+  .col5{
+      width:41.66666%;
+      min-width:41.66666%;
+      max-width:41.66666%;
+  }
+  .col6{
+      width:50%;
+      min-width:50%;
+      max-width:50%;
+  }
+  .col7{
+      width:58.33333%;
+      min-width:58.33333%;
+      max-width:58.33333%;
+  }
+  .col8{
+      width:66.66666%;
+      min-width:66.66666%;
+      max-width:66.66666%;
+  }
+  .col9{
+      width:75%;
+      min-width:75%;
+      max-width:75%;
+  }
+  .col10{
+      width:83.33333%;
+      min-width:83.33333%;
+      max-width:83.33333%;
+  }
+  .col11{
+     width:91.66666%;
+     min-width:91.66666%;
+     max-width:91.66666%;
+  }
+  .col12{
+     width:100%;
+     min-width:100%;
+  }
+
+}
+
 a{
    outline: 0;
 }
@@ -25,8 +109,33 @@ input::-moz-focus-inner {
 }
 
 
-fieldset{
+ .lotus-form-element
+   {
+		  display: block;
+		  width: 100%;
+          margin-top:5px;
+		  padding: 6px 12px;
+		  font-size: 1em;
+		  line-height: 1.428571429;
+		  color: #555;
+		  vertical-align: middle;
+		  background-color: #fff;
+		  background-image: none;
+		  border: 1px solid #ccc;
+		  @include border-radius(4px);
+          @include box-sizing(border-box);
+          font-family:Arial,Helvetica,Sans-serif;
+     select
+     {
+        //For select that outside div will be the mb-form-element
+        @include box-shadow(rgba(0, 0, 0, 0.10) 0px 1px 1px inset );  
+     }
 
+   }
+
+
+fieldset
+{
 	border:none;
 	margin:5px 0px 5px 0px;
 	padding:2px 0px 2px 0px;
@@ -35,7 +144,6 @@ fieldset{
 	    margin-top:7px;
 	    margin-bottom:7px;
 	}
-
 }
 
 textarea,input[type=text],input[type=password]{

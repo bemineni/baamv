@@ -13,5 +13,6 @@
  *= require blog
  *= require session
  *= require user
+ *= require highlight
  *= require font_awesome/font-awesome
 */
